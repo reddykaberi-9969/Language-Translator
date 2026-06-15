@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fluentia — translate text instantly between languages with a beautiful, modern interface." />
+  <title>Fluentia | Language Translator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+</head>
+<body>
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <header class="header">
+    <div class="header__brand">
+      <img src="assets/icons/logo.svg" alt="Fluentia logo" class="header__logo" width="36" height="36" />
+      <span class="header__title">Fluentia</span>
+    </div>
+    <div class="header__actions">
+      <label class="theme-toggle" for="themeToggle" title="Toggle dark mode">
+        <input type="checkbox" id="themeToggle" class="theme-toggle__input" />
+        <span class="theme-toggle__track">
+          <span class="theme-toggle__thumb">
+            <img src="assets/icons/sun.svg" alt="" class="theme-icon theme-icon--light" width="14" height="14" />
+            <img src="assets/icons/moon.svg" alt="" class="theme-icon theme-icon--dark" width="14" height="14" />
+          </span>
+        </span>
+      </label>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <h1 class="hero__title">Fluentia</h1>
+      <p class="hero__subtitle">Translate with clarity — fast, elegant, multilingual</p>
+    </section>
+
+    <div class="translator-card glass">
+      <div class="lang-bar">
+        <div class="lang-select">
+          <label for="sourceLang" class="lang-select__label">From</label>
+          <div class="select-wrap">
+            <select id="sourceLang" class="select" aria-label="Source language">
+              <option value="auto">Auto Detect</option>
+              <option value="en" selected>English</option>
+              <option value="hi">Hindi</option>
+              <option value="fr">French</option>
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+            </select>
+            <img src="assets/icons/chevron.svg" alt="" class="select-arrow" width="16" height="16" />
+          </div>
+        </div>
+
+        <button type="button" id="swapBtn" class="swap-btn" title="Swap languages" aria-label="Swap languages">
+          <img src="assets/icons/swap.svg" alt="" width="20" height="20" class="swap-btn__icon" />
+        </button>
+
+        <div class="lang-select">
+          <label for="targetLang" class="lang-select__label">To</label>
+          <div class="select-wrap">
+            <select id="targetLang" class="select" aria-label="Target language">
+              <option value="en">English</option>
+              <option value="hi" selected>Hindi</option>
+              <option value="fr">French</option>
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+            </select>
+            <img src="assets/icons/chevron.svg" alt="" class="select-arrow" width="16" height="16" />
+          </div>
+        </div>
+      </div>
+
+      <div class="panels">
+        <div class="panel panel--input">
+          <div class="panel__header">
+            <span class="panel__label">Source text</span>
+            <span id="charCount" class="char-count">Characters: 0 / 5000</span>
+          </div>
+          <textarea
+            id="sourceText"
+            class="text-area"
+            placeholder="Type or paste text here..."
+            maxlength="5000"
+            rows="8"
+            spellcheck="true"
+          ></textarea>
+        </div>
+
+        <div class="panel panel--output">
+          <div class="panel__header">
+            <span class="panel__label">Translation</span>
+            <div class="panel__actions">
+              <button type="button" id="speakBtn" class="icon-btn" title="Speak translation" aria-label="Speak translation" disabled>
+                <img src="assets/icons/volume.svg" alt="" width="18" height="18" class="icon-btn__icon icon-btn__icon--play" />
+                <img src="assets/icons/pause.svg" alt="" width="18" height="18" class="icon-btn__icon icon-btn__icon--pause" />
+              </button>
+              <button type="button" id="copyBtn" class="icon-btn" title="Copy translation (Ctrl+Shift+C)" aria-label="Copy translation" disabled>
+                <img src="assets/icons/copy.svg" alt="" width="18" height="18" />
+              </button>
+              <button type="button" id="downloadBtn" class="icon-btn" title="Download as .txt" aria-label="Download translation" disabled>
+                <img src="assets/icons/download.svg" alt="" width="18" height="18" />
+              </button>
+            </div>
+          </div>
+          <div id="outputText" class="output-area" role="status" aria-live="polite" tabindex="0" title="Focus here, then Ctrl+C to copy translation">
+            <span class="output-placeholder">Your translation will appear here...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-bar">
+        <button type="button" id="translateBtn" class="btn btn--primary">
+          <span class="btn__text">Translate</span>
+          <span class="btn__loader" aria-hidden="true"></span>
+        </button>
+        <p class="shortcut-hint">
+          <kbd>Enter</kbd> translate · <kbd>Ctrl</kbd>+<kbd>C</kbd> copy (output focused) · <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> copy anywhere
+        </p>
+      </div>
+    </div>
+
+    <section class="history-section" id="historySection">
+      <div class="history-header">
+        <h2 class="history-title">
+          <img src="assets/icons/history.svg" alt="" width="20" height="20" />
+          Recent translations
+        </h2>
+        <button type="button" id="clearHistoryBtn" class="btn btn--ghost btn--sm">Clear history</button>
+      </div>
+      <div id="historyList" class="history-list">
+        <p class="history-empty">No translations yet. Your recent work will show up here.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p><strong>Fluentia</strong> · Powered by professional translation APIs</p>
+  </footer>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
