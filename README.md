@@ -1,8 +1,6 @@
 # Fluentia
 
-**Translate with clarity** — a modern, responsive language translator with glassmorphism UI, built with **HTML**, **CSS**, and **vanilla JavaScript**. Translate instantly, manage history, toggle dark mode, and more.
-
-![Fluentia](assets/icons/logo.svg)
+**Translate with clarity** — a modern, responsive language translator with UI, built with **HTML**, **CSS**, and **JavaScript**. Translate instantly, manage history, toggle dark mode, and more.
 
 ## Features
 
@@ -116,57 +114,13 @@ window.CONFIG = {
 
 When **Auto Detect** is selected, the detected language is shown in a toast before translation.
 
-## Keyboard Shortcuts
-
-| Shortcut              | Action              |
-|-----------------------|---------------------|
-| `Enter` (in input)    | Translate           |
-| `Shift + Enter`       | New line in input   |
-| `Ctrl + C` (output focused) | Copy translation |
-| `Ctrl + Shift + C`    | Copy translation (anywhere) |
-
-## Browser Support
 
 - Chrome, Edge, Firefox, Safari (recent versions)
 - Text-to-speech uses the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) (availability varies by browser/OS)
-
-## Customization
-
-| Setting            | File        | Key / variable      |
-|--------------------|------------|---------------------|
-| Max characters     | `config.js`| `maxCharacters`     |
-| History limit      | `config.js`| `historyLimit`      |
-| Active API         | `config.js`| `provider`          |
-| Colors & theme     | `style.css`| `:root` CSS variables |
-
-## Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| `ERR_EMPTY_RESPONSE` on localhost:5500 | A **stale or crashed** process is on port 5500. Kill it (see below), then restart with `npm start` |
-| Translation fails | Check `config.js` provider and API key |
-| CORS error (Microsoft/Google) | Use MyMemory for local dev, or add a backend proxy |
-| MyMemory quota exceeded | Switch to Microsoft/Google, or wait for quota reset |
-| Clipboard copy fails | Use HTTPS or localhost; grant clipboard permission |
-| TTS wrong language | Target language drives speech; ensure correct target is selected |
-
-### Fix `ERR_EMPTY_RESPONSE` (port 5500)
-
-1. Close other servers (old terminals, Live Server **Go Live**).
-2. In PowerShell:
-
-```powershell
-Get-NetTCPConnection -LocalPort 5500 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
-```
-
-3. From the project folder: `npm start`
-4. Open **http://127.0.0.1:5500** (not only `localhost` if issues persist).
 
 ## Security
 
 - Keep API keys in `config.js` and add `config.js` to `.gitignore` if you store real secrets.
 - For production, proxy API calls through your own backend so keys are never exposed in the browser.
 
-## License
 
-MIT — free to use and modify for personal and educational projects.
